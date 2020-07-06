@@ -1,1 +1,3 @@
 PRODUCT_MAKEFILES := $(LOCAL_DIR)/raspi3.mk
+
+COMMON_LUNCH_CHOICES := raspi3-eng
