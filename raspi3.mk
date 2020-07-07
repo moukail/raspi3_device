@@ -13,20 +13,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.drm.mode.force=1280x720 \
     ro.opengles.version=131072 \
     ro.sf.lcd_density=213 \
+    ro.config.low_ram=true \
     wifi.interface=wlan0
 
 # application packages
 PRODUCT_PACKAGES += \
-    Launcher2 \
-    Settings
+    LeanbackSampleApp \
+    TvSampleLeanbackLauncher
 
 # system packages
 PRODUCT_PACKAGES += \
     libGLES_mesa \
     gralloc.rpi3 \
     hwcomposer.rpi3 \
+    memtrack.rpi3 \
     audio.primary.rpi3 \
     audio.usb.default \
+    wificond \
+    wifilogd \
     wpa_supplicant \
     wpa_supplicant.conf
 
@@ -39,7 +43,9 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.keymaster@3.0-impl \
-    android.hardware.memtrack@1.0-impl
+    android.hardware.memtrack@1.0-service \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.wifi@1.0-service
 
 # system configurations
 PRODUCT_COPY_FILES := \
@@ -47,7 +53,6 @@ PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml \
     $(LOCAL_PATH)/rpi3_core_hardware.xml:system/etc/permissions/rpi3_core_hardware.xml \
     $(LOCAL_PATH)/init.rpi3.rc:root/init.rpi3.rc \
     $(LOCAL_PATH)/init.usb.rc:root/init.usb.rc \
@@ -72,6 +77,7 @@ PRODUCT_COPY_FILES := \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:system/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
+    frameworks/base/data/sounds/effects/ogg/Effect_Tick_48k.ogg:system/media/audio/ui/Effect_Tick.ogg \
     $(PRODUCT_COPY_FILES)
 
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
